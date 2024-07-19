@@ -1,7 +1,7 @@
 import { clientCredentials } from '../client';
 
-const getProfilesByUser = (id, creatorId) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/profiles?"creator_id"="${creatorId}"`, {
+const getLogsByProfile = (id, profileId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/profiles?"profile_id"="${profileId}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ const getProfilesByUser = (id, creatorId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSingleProfile = (id) => new Promise((resolve, reject) => {
+const getSinglePost = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/profiles/${id}`, {
     method: 'GET',
     headers: {
@@ -26,6 +26,6 @@ const getSingleProfile = (id) => new Promise((resolve, reject) => {
 });
 
 export {
-  getProfilesByUser,
-  getSingleProfile,
+  getLogsByProfile,
+  getSinglePost,
 };
