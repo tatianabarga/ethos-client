@@ -1,11 +1,10 @@
 import { clientCredentials } from '../client';
 
-const getLogsByProfile = (id, profileId) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/profiles?"profile_id"="${profileId}"`, {
+const getLogsByProfile = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/logs?profile=${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      // Authorization: `${id}`, TODO: do i need this?? if not remove id prop
     },
   })
     .then((response) => response.json())
@@ -13,8 +12,8 @@ const getLogsByProfile = (id, profileId) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-const getSinglePost = (id) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/profiles/${id}`, {
+const getSingleLog = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/logs/${id}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -27,5 +26,5 @@ const getSinglePost = (id) => new Promise((resolve, reject) => {
 
 export {
   getLogsByProfile,
-  getSinglePost,
+  getSingleLog,
 };

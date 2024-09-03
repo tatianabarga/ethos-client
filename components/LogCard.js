@@ -9,7 +9,6 @@ export default function LogCard({ logObj }) {
       <Card className="text-center">
         <Card.Text>{logObj.title}</Card.Text>
         <Card.Text>{logObj.score_impact}</Card.Text>
-        <Card.Text>{logObj.description}</Card.Text>
         <Card.Text>{logObj.event_date}</Card.Text>
         <Card.Text>{logObj.log_date}</Card.Text>
         <Card.Body>
@@ -36,13 +35,12 @@ export default function LogCard({ logObj }) {
 
 LogCard.propTypes = {
   logObj: PropTypes.shape({
-    id: PropTypes.string,
+    id: PropTypes.number,
     score_impact: PropTypes.string,
-    creator_id: PropTypes.string,
-    description: PropTypes.string,
+    creator_id: PropTypes.number,
     event_date: PropTypes.string,
     log_date: PropTypes.string,
-    profile_id: PropTypes.string,
+    profile_id: PropTypes.number,
     title: PropTypes.string,
   }).isRequired,
   // onUpdate: PropTypes.func.isRequired,

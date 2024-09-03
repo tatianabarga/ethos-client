@@ -24,7 +24,7 @@ export default function NavBar() {
               <Nav.Link>Circles</Nav.Link>
             </Link>
             <Link passHref href="/user">
-              <Nav.Link>User Profile</Nav.Link>
+              <Nav.Link>My User</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out
