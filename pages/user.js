@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-// import PropTypes from 'prop-types';
+import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 import { useAuth } from '../utils/context/authContext';
 import { getProfilesByUser } from '../utils/data/profileData';
 import ProfileCard from '../components/ProfileCard';
@@ -25,17 +26,13 @@ function Home() {
       {profiles.map((profile) => (
         <ProfileCard key={profile.id} profileObj={profile} onUpdate={getProfiles} />
       ))}
+      <Link href="/profiles/new" passHref>
+        <Button variant="primary" className="m-2">
+          Create New Profile
+        </Button>
+      </Link>
     </>
   );
 }
-
-// Home.propTypes = {
-//   user: PropTypes.shape({
-//     name: PropTypes.string,
-//     uid: PropTypes.string,
-//     id: PropTypes.string,
-//   }).isRequired,
-//   // onUpdate: PropTypes.func.isRequired,
-// };
 
 export default Home;

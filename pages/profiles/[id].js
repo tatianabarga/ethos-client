@@ -11,23 +11,21 @@ function ViewProfile() {
   const router = useRouter();
   const { id } = router.query;
 
+  useEffect(() => {
+    getSingleProfile(id).then(setProfileDetails);
+  }, [id]);
+
   const getLogs = () => {
-    getLogsByProfile(profileDetails?.id).then(setLogs);
+    getLogsByProfile(profileDetails.id).then(setLogs);
   };
 
   useEffect(() => {
-    // console.log('profile id:', id);
     console.log('profileDetails here:', profileDetails);
-    // console.log(profileDetails);
   }, [profileDetails]);
 
   useEffect(() => {
-    getSingleProfile(id).then(setProfileDetails);
-    // console.log(profileDetails);
-  }, [id]);
-
-  useEffect(() => {
     getLogs();
+    console.log('logs here:', logs);
   }, [id]);
 
   return (

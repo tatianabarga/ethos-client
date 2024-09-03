@@ -45,3 +45,11 @@ To learn more about Next.js, take a look at the following resources:
 
 ## Tech Stack
 - Sass
+
+## Tech Stack
+- Sass
+
+
+wireframe: https://www.figma.com/design/OV8zg11xjindtsnKR8iW9k/Ethos?node-id=0-1&t=LpJ6Ndp5CZLbxgIk-0
+
+project board: https://github.com/users/tatianabarga/projects/5/views/1?pane=issue&itemId=70796528
