@@ -16,7 +16,7 @@ function ViewProfile() {
   }, [id]);
 
   const getLogs = () => {
-    getLogsByProfile(profileDetails.id).then(setLogs);
+    getLogsByProfile(id).then(setLogs);
   };
 
   useEffect(() => {
@@ -31,7 +31,7 @@ function ViewProfile() {
   return (
     <>
       <h1>{profileDetails?.name}</h1>
-      <h2>bio</h2>
+      <h2>bio:</h2>
       <>{profileDetails?.bio}</>
       {/* loop through profiles w profile card compenent */}
       {logs.map((log) => (

@@ -18,16 +18,16 @@ function ViewLog() {
         console.log('logDetails:', data);
       });
     }
-  }, []);
+  }, [id]);
 
   useEffect(() => {
-    if (logDetails.profile) {
+    if (logDetails?.profile) {
       getSingleProfile(logDetails.profile).then((data) => {
         setProfile(data);
         console.log('profile:', data);
       });
     }
-  }, []);
+  }, [logDetails]);
 
   return (
     <>
