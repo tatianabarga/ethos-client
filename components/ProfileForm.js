@@ -1,10 +1,18 @@
+import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { getAllCircles } from '../utils/data/circleData';
 
 function ProfileForm() {
+  const [circles, setCircles] = useState([]);
+
   const handleSubmit = (e) => {
     e.preventDefault(); // TODO: create submit logic for both update and create
   };
+
+  useEffect(() => {
+    getAllCircles().then(setCircles);
+  }, []);
 
   return (
     <div>
@@ -26,9 +34,9 @@ function ProfileForm() {
 
         <Form.Label>What circles do you want this profile to be shared with?</Form.Label>
         <Form.Select aria-label="circles">
-          <option value="1">One</option> {/* TODO: loop through circles for options */}
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+          {circles.map((circle) => (
+            <option value={circle.id}>{circle.name}</option>
+          ))}
         </Form.Select>
 
         <Button variant="primary" type="submit">
