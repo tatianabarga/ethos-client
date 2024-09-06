@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-import PropTypes from 'prop-types';
+import PropTypes, { arrayOf } from 'prop-types';
 import { getCirclesByUser } from '../utils/data/circleData';
 import { createProfile, updateProfile } from '../utils/data/profileData';
 import { useAuth } from '../utils/context/authContext';
@@ -18,7 +18,7 @@ const initialState = {
 
 function ProfileForm({ obj }) {
   const [circles, setCircles] = useState([]);
-  const [formInput, setFormInput] = useState({ initialState });
+  const [formInput, setFormInput] = useState(initialState);
   const [selectedCircles, setSelectedCircles] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
@@ -61,11 +61,20 @@ function ProfileForm({ obj }) {
   };
 
   useEffect(() => {
+    console.log('obj type:', typeof obj, 'obj looks like:', obj);
     getCirclesByUser(user.id).then(setCircles);
-    if (obj.id) {
-      setFormInput(obj);
+    console.log('circles looks like:', circles);
+    console.log('obj.circles looks like:', obj.circles);
+    if (obj.circles) {
+      setSelectedCircles(obj.circles);
+      setFormInput((prevState) => ({
+        ...prevState,
+        ...obj,
+      }));
     }
-  }, []);
+  }, [user, obj, obj.circles]);
+
+  console.log('selectedCircles looks like:', selectedCircles);
 
   useEffect(() => {
     setFormInput((prevState) => ({
@@ -87,33 +96,28 @@ function ProfileForm({ obj }) {
           <Form.Control type="text" value={formInput.bio} placeholder="Who is this person/ corporation/ contractor? How are they involved? How are they related to other relevant profiles? Is there anything else circle members will need to know?" name="bio" onChange={handleChange} />
         </Form.Group>
 
-        <>
-          {obj.id ? null : (
-            <Form.Group className="mb-3" controlId="initialScore">
-              <Form.Label>Initial Score</Form.Label>
-              <Form.Control type="text" placeholder="You can give them an initial score here. This is optional." name="initial_score" onChange={handleChange} />
-            </Form.Group>
-          )}
-        </>
+        {obj.id ? null : (
+          <Form.Group className="mb-3" controlId="initialScore">
+            <Form.Label>Initial Score</Form.Label>
+            <Form.Control type="text" placeholder="You can give them an initial score here. This is optional." name="initial_score" onChange={handleChange} />
+          </Form.Group>
+        )}
 
         <Form.Label>What circles do you want this profile to be shared with?</Form.Label>
-        <ToggleButtonGroup type="checkbox" className="mb-2">
+        <ToggleButtonGroup type="checkbox" className="mb-2" value={selectedCircles}>
           {circles.map((circle) => (
             <ToggleButton
               key={circle.id}
               id={`circle-${circle.id}`}
-              type="checkbox"
               variant="outline-primary"
               value={circle.id}
               checked={selectedCircles.includes(circle.id)}
-              onClick={() => handleToggleCircle(circle.id)}
+              onChange={() => handleToggleCircle(circle.id)}
             >
               {circle.name}
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
-        {/* <Form.Select aria-label="circles" name="circles" onChange={handleChange}> */}
-        {/* </Form.Select> change this to be check feild to incorporate multiple */}
 
         <Button variant="primary" type="submit">
           Submit
@@ -128,6 +132,7 @@ ProfileForm.propTypes = {
     name: PropTypes.string,
     bio: PropTypes.string,
     id: PropTypes.number,
+    circles: arrayOf(PropTypes.number),
   }),
 };
 
