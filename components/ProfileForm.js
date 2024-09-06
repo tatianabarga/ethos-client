@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { getAllCircles } from '../utils/data/circleData';
+import { getCirclesByUser } from '../utils/data/circleData';
 import { createProfile } from '../utils/data/profileData';
 import { useAuth } from '../utils/context/authContext';
 
@@ -39,7 +39,7 @@ function ProfileForm() {
   };
 
   useEffect(() => {
-    getAllCircles().then(setCircles);
+    getCirclesByUser(user.id).then(setCircles);
   }, []);
 
   useEffect(() => {
