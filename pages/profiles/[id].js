@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
+import { Button } from 'react-bootstrap';
+import Link from 'next/link';
 import { getLogsByProfile } from '../../utils/data/logData';
 import LogCard from '../../components/LogCard';
 import { getSingleProfile } from '../../utils/data/profileData';
 
-function ViewProfile() {
+export default function ViewProfile() {
   const [profileDetails, setProfileDetails] = useState(null);
   const [logs, setLogs] = useState([]);
   const router = useRouter();
@@ -37,6 +39,11 @@ function ViewProfile() {
       {logs.map((log) => (
         <LogCard key={log.id} logObj={log} onUpdate={getLogs} />
       ))}
+      <Link href={`/profiles/update/${profileDetails?.id}`} passHref>
+        <Button variant="primary" className="m-2">
+          Update Profile
+        </Button>
+      </Link>
     </>
   );
 }
@@ -49,5 +56,3 @@ ViewProfile.propTypes = {
   }).isRequired,
   // onUpdate: PropTypes.func.isRequired,
 };
-
-export default ViewProfile;

@@ -38,8 +38,26 @@ const createProfile = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const updateProfile = (payload) => new Promise((resolve, reject) => {
+  if (!payload.id) {
+    reject(new Error('Profile ID is required for updating a profile.'));
+    return;
+  }
+
+  fetch(`${clientCredentials.databaseURL}/profiles/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getProfilesByUser,
   getSingleProfile,
   createProfile,
+  updateProfile,
 };
