@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 import { getCirclesByUser } from '../utils/data/circleData';
 import { createProfile } from '../utils/data/profileData';
 import { useAuth } from '../utils/context/authContext';
@@ -15,9 +16,9 @@ const initialState = {
   creator: '',
 };
 
-function ProfileForm() {
+function ProfileForm({ obj }) {
   const [circles, setCircles] = useState([]);
-  const [formInput, setFormInput] = useState([initialState]);
+  const [formInput, setFormInput] = useState(initialState);
   const [selectedCircles, setSelectedCircles] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
@@ -55,6 +56,9 @@ function ProfileForm() {
 
   useEffect(() => {
     getCirclesByUser(user.id).then(setCircles);
+    if (obj.id) {
+      setFormInput(obj);
+    }
   }, []);
 
   useEffect(() => {
@@ -69,12 +73,12 @@ function ProfileForm() {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" placeholder="Enter the person/ corporation/ contractor name." name="name" onChange={handleChange} />
+          <Form.Control type="text" value={formInput.name} placeholder="Enter the person/ corporation/ contractor name." name="name" onChange={handleChange} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="bio">
           <Form.Label>Bio</Form.Label>
-          <Form.Control type="text" placeholder="Who is this person/ corporation/ contractor? How are they involved? How are they related to other relevant profiles? Is there anything else circle members will need to know?" name="bio" onChange={handleChange} />
+          <Form.Control type="text" value={formInput.bio} placeholder="Who is this person/ corporation/ contractor? How are they involved? How are they related to other relevant profiles? Is there anything else circle members will need to know?" name="bio" onChange={handleChange} />
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="initialScore">
@@ -108,5 +112,17 @@ function ProfileForm() {
     </div>
   );
 }
+
+ProfileForm.propTypes = {
+  obj: PropTypes.shape({
+    name: PropTypes.string,
+    bio: PropTypes.string,
+    id: PropTypes.number,
+  }),
+};
+
+ProfileForm.defaultProps = {
+  obj: initialState,
+};
 
 export default ProfileForm;

@@ -15,7 +15,7 @@ export default function UpdateProfile() {
   return (
     <div>
       Update {profileDetails.name}
-      <ProfileForm />
+      <ProfileForm obj={profileDetails} />
     </div>
   );
 }
