@@ -5,7 +5,7 @@ import Form from 'react-bootstrap/Form';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 import { getCirclesByUser } from '../utils/data/circleData';
-import { createProfile } from '../utils/data/profileData';
+import { createProfile, updateProfile } from '../utils/data/profileData';
 import { useAuth } from '../utils/context/authContext';
 
 const initialState = {
@@ -18,7 +18,7 @@ const initialState = {
 
 function ProfileForm({ obj }) {
   const [circles, setCircles] = useState([]);
-  const [formInput, setFormInput] = useState(initialState);
+  const [formInput, setFormInput] = useState({ initialState });
   const [selectedCircles, setSelectedCircles] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
@@ -49,9 +49,15 @@ function ProfileForm({ obj }) {
       ...formInput,
       circles: selectedCircles,
     };
-    createProfile(payload).then(() => {
-      router.push('/user');
-    });
+    if (obj.id) {
+      updateProfile({ ...payload, id: obj.id }).then(() => {
+        router.push(`/profiles/${obj.id}`);
+      });
+    } else {
+      createProfile(payload).then(() => {
+        router.push('/user');
+      });
+    }
   };
 
   useEffect(() => {
