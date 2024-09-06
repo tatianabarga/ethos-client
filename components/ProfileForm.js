@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { getCirclesByUser } from '../utils/data/circleData';
 import { createProfile } from '../utils/data/profileData';
 import { useAuth } from '../utils/context/authContext';
@@ -10,13 +11,14 @@ const initialState = {
   name: '',
   bio: '',
   initial_score: 0,
-  circles: '',
+  circles: [],
   creator: '',
 };
 
 function ProfileForm() {
   const [circles, setCircles] = useState([]);
   const [formInput, setFormInput] = useState([initialState]);
+  const [selectedCircles, setSelectedCircles] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -28,10 +30,23 @@ function ProfileForm() {
     }));
   };
 
+  const handleToggleCircle = (circleId) => {
+    setSelectedCircles((prevSelectedCircles) => {
+      let newCircles = [];
+      if (prevSelectedCircles.includes(circleId)) {
+        newCircles = prevSelectedCircles.filter((id) => id !== circleId);
+      } else {
+        newCircles = [...prevSelectedCircles, circleId];
+      }
+      return newCircles;
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     const payload = {
       ...formInput,
+      circles: selectedCircles,
     };
     createProfile(payload).then(() => {
       router.push('/user');
@@ -68,11 +83,23 @@ function ProfileForm() {
         </Form.Group>
 
         <Form.Label>What circles do you want this profile to be shared with?</Form.Label>
-        <Form.Select aria-label="circles" name="circles" onChange={handleChange}>
+        <ToggleButtonGroup type="checkbox" className="mb-2">
           {circles.map((circle) => (
-            <option value={circle.id} key={circle.id}>{circle.name}</option>
+            <ToggleButton
+              key={circle.id}
+              id={`circle-${circle.id}`}
+              type="checkbox"
+              variant="outline-primary"
+              value={circle.id}
+              checked={selectedCircles.includes(circle.id)}
+              onClick={() => handleToggleCircle(circle.id)}
+            >
+              {circle.name}
+            </ToggleButton>
           ))}
-        </Form.Select> {/* change this to be check feild to incorporate multiple */}
+        </ToggleButtonGroup>
+        {/* <Form.Select aria-label="circles" name="circles" onChange={handleChange}> */}
+        {/* </Form.Select> change this to be check feild to incorporate multiple */}
 
         <Button variant="primary" type="submit">
           Submit
