@@ -22,8 +22,6 @@ function LogForm({ obj, profileId }) {
   const { user } = useAuth();
   const router = useRouter();
 
-  console.log('profileId from log form:', profileId);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormInput((prevState) => ({
@@ -49,6 +47,19 @@ function LogForm({ obj, profileId }) {
   };
 
   useEffect(() => {
+    if (obj.id) {
+      setFormInput({
+        title: obj.title || '',
+        description: obj.description || '',
+        score_impact: obj.score_impact || 0,
+        profile: obj.profile || '',
+        creator: obj.creator || '',
+        event_date: obj.event_date || '',
+      });
+    }
+  }, [obj]);
+
+  useEffect(() => {
     if (obj.profile) {
       setProfile(obj.profile);
     } else {
@@ -62,7 +73,7 @@ function LogForm({ obj, profileId }) {
       profile: profile.id,
       creator: user.id,
     }));
-  }, [profile, user]);
+  }, [profile, user, obj]);
 
   return (
     <div>
@@ -100,12 +111,12 @@ LogForm.propTypes = {
     title: PropTypes.string,
     description: PropTypes.string,
     id: PropTypes.number,
-    score_impact: PropTypes.number,
+    score_impact: PropTypes.string,
     event_date: PropTypes.string,
     profile: PropTypes.number,
     creator: PropTypes.number,
   }),
-  profileId: PropTypes.shape(PropTypes.number),
+  profileId: PropTypes.number,
 };
 
 LogForm.defaultProps = {
