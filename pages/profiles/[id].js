@@ -35,13 +35,18 @@ export default function ViewProfile() {
       <h1>{profileDetails?.name}</h1>
       <h2>bio:</h2>
       <>{profileDetails?.bio}</>
-      {/* loop through profiles w profile card compenent */}
+      {/* loop through logs with log card compenent */}
       {logs.map((log) => (
         <LogCard key={log.id} logObj={log} onUpdate={getLogs} />
       ))}
       <Link href={`/profiles/update/${profileDetails?.id}`} passHref>
         <Button variant="primary" className="m-2">
           Update Profile
+        </Button>
+      </Link>
+      <Link href={`/logs/new?profileId=${profileDetails?.id}`} passHref>
+        <Button variant="primary" className="m-2">
+          Add a Log
         </Button>
       </Link>
     </>
