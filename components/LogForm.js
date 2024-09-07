@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { getSingleProfile } from '../utils/data/profileData';
 import { updateLog, createLog } from '../utils/data/logData';
 import { useAuth } from '../utils/context/authContext';
+import getScoreByProfile from '../utils/data/scoreData';
 
 const initialState = {
   title: '',
@@ -18,6 +19,7 @@ const initialState = {
 
 function LogForm({ obj, profileId }) {
   const [profile, setProfile] = useState([]);
+  const [score, setScore] = useState([]);
   const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
   const router = useRouter();
@@ -75,6 +77,12 @@ function LogForm({ obj, profileId }) {
     }));
   }, [profile, user, obj]);
 
+  useEffect(() => {
+    getScoreByProfile(profile.id).then((scoreData) => {
+      setScore(scoreData[0]);
+    });
+  }, [profile]);
+
   return (
     <div>
       <Form onSubmit={handleSubmit}>
@@ -95,7 +103,9 @@ function LogForm({ obj, profileId }) {
 
         <Form.Group className="mb-3" controlId="score_impact">
           <Form.Label>Impact on Ethos Score</Form.Label>
-          {profile.score || <div>This profile does not have a score. Your input here will create this profile's score.</div>}
+          <div>Current Score: </div>
+          { /* eslint-disable-next-line react/no-unescaped-entities */ }
+          {score?.score || <div>This profile does not have a score. Your input here will create this profile's score.</div>}
           <Form.Control type="text" value={formInput.score_impact} placeholder="Enter a positive or negative number" name="score_impact" onChange={handleChange} />
         </Form.Group>
 
