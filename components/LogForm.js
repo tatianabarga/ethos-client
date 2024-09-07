@@ -95,6 +95,7 @@ function LogForm({ obj, profileId }) {
 
         <Form.Group className="mb-3" controlId="score_impact">
           <Form.Label>Impact on Ethos Score</Form.Label>
+          {profile.score || <div>This profile does not have a score. Your input here will create this profile's score.</div>}
           <Form.Control type="text" value={formInput.score_impact} placeholder="Enter a positive or negative number" name="score_impact" onChange={handleChange} />
         </Form.Group>
 

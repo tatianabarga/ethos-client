@@ -33,6 +33,7 @@ function ViewLog() {
   return (
     <>
       <h1>{profile?.name}</h1>
+      <h2>Current Score: {profile?.score || "This profile doesn't have a score yet"}</h2>
       <Card>
         <div>{logDetails?.title}</div>
         <div>description: </div>
