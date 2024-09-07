@@ -61,10 +61,7 @@ function ProfileForm({ obj }) {
   };
 
   useEffect(() => {
-    console.log('obj type:', typeof obj, 'obj looks like:', obj);
     getCirclesByUser(user.id).then(setCircles);
-    console.log('circles looks like:', circles);
-    console.log('obj.circles looks like:', obj.circles);
     if (obj.circles) {
       setSelectedCircles(obj.circles);
       setFormInput((prevState) => ({
@@ -73,8 +70,6 @@ function ProfileForm({ obj }) {
       }));
     }
   }, [user, obj, obj.circles]);
-
-  console.log('selectedCircles looks like:', selectedCircles);
 
   useEffect(() => {
     setFormInput((prevState) => ({

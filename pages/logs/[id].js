@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useRouter } from 'next/router';
 import { Button, Card } from 'react-bootstrap';
+import Link from 'next/link';
 import { getSingleLog } from '../../utils/data/logData';
 import { getSingleProfile } from '../../utils/data/profileData';
 
@@ -42,7 +43,11 @@ function ViewLog() {
         <div>{logDetails?.event_date}</div>
         <div>log date: </div>
         <div>{logDetails?.log_date}</div>
-        <Button>Update</Button>
+        <Link href={`/logs/update/${logDetails?.id}`} passHref>
+          <Button variant="primary" className="m-2" obj={logDetails}>
+            Update Log
+          </Button>
+        </Link>
       </Card>
     </>
   );
