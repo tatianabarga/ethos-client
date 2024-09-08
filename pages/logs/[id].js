@@ -5,9 +5,11 @@ import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { getSingleLog } from '../../utils/data/logData';
 import { getSingleProfile } from '../../utils/data/profileData';
+import getScoreByProfile from '../../utils/data/scoreData';
 
 function ViewLog() {
   const [logDetails, setLogDetails] = useState(null);
+  const [score, setScore] = useState({});
   const [profile, setProfile] = useState(null);
   const router = useRouter();
   const { id } = router.query;
@@ -27,13 +29,17 @@ function ViewLog() {
         setProfile(data);
         console.log('profile:', data);
       });
+      getScoreByProfile(logDetails.profile).then((scoreData) => {
+        setScore(scoreData[0].score);
+        console.log('scoreData[0].score:', scoreData[0].score);
+      });
     }
   }, [logDetails]);
 
   return (
     <>
       <h1>{profile?.name}</h1>
-      <h2>Current Score: {profile?.score || "This profile doesn't have a score yet"}</h2>
+      <h2>Current Score: {score || "This profile doesn't have a score yet"}</h2>
       <Card>
         <div>{logDetails?.title}</div>
         <div>description: </div>
