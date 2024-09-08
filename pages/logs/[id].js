@@ -30,7 +30,12 @@ function ViewLog() {
         console.log('profile:', data);
       });
       getScoreByProfile(logDetails.profile).then((scoreData) => {
-        setScore(scoreData[0]);
+        if (scoreData.length > 0) {
+          setScore(scoreData[0]);
+        } else {
+          // Set a default empty object if no score is returned
+          setScore({ score: null });
+        }
       });
     }
   }, [logDetails]);
@@ -38,7 +43,7 @@ function ViewLog() {
   return (
     <>
       <h1>{profile?.name}</h1>
-      <h2>Current Score: {score.score || "This profile doesn't have a score yet"}</h2>
+      <h2>Current Score: {score?.score !== null ? score.score : "This profile doesn't have a score yet"}</h2>
       <Card>
         <div>{logDetails?.title}</div>
         <div>description: </div>
