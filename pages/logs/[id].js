@@ -5,9 +5,11 @@ import { Button, Card } from 'react-bootstrap';
 import Link from 'next/link';
 import { getSingleLog } from '../../utils/data/logData';
 import { getSingleProfile } from '../../utils/data/profileData';
+import getScoreByProfile from '../../utils/data/scoreData';
 
 function ViewLog() {
   const [logDetails, setLogDetails] = useState(null);
+  const [score, setScore] = useState({});
   const [profile, setProfile] = useState(null);
   const router = useRouter();
   const { id } = router.query;
@@ -27,12 +29,21 @@ function ViewLog() {
         setProfile(data);
         console.log('profile:', data);
       });
+      getScoreByProfile(logDetails.profile).then((scoreData) => {
+        if (scoreData.length > 0) {
+          setScore(scoreData[0]);
+        } else {
+          // Set a default empty object if no score is returned
+          setScore({ score: null });
+        }
+      });
     }
   }, [logDetails]);
 
   return (
     <>
       <h1>{profile?.name}</h1>
+      <h2>Current Score: {score?.score !== null ? score.score : "This profile doesn't have a score yet"}</h2>
       <Card>
         <div>{logDetails?.title}</div>
         <div>description: </div>
@@ -61,6 +72,7 @@ ViewLog.propTypes = {
     score_impact: PropTypes.number,
     log_date: PropTypes.number,
     event_date: PropTypes.number,
+    profile: PropTypes.number,
   }).isRequired,
   profileDetails: PropTypes.shape({
     name: PropTypes.string,

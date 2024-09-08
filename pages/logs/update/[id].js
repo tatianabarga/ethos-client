@@ -4,7 +4,7 @@ import { getSingleLog } from '../../../utils/data/logData';
 import LogForm from '../../../components/LogForm';
 
 export default function UpdateLog() {
-  const [logDetails, setLogDetails] = useState(null);
+  const [logDetails, setLogDetails] = useState([]);
   const router = useRouter();
   const { id } = router.query;
 
@@ -14,7 +14,7 @@ export default function UpdateLog() {
 
   return (
     <div>
-      <h2>Update {logDetails.title} Log</h2>
+      <h2>Update {logDetails?.title} Log</h2>
       <LogForm obj={logDetails} />
     </div>
   );

@@ -3,9 +3,9 @@ import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
-import { getSingleProfile } from '../utils/data/profileData';
 import { updateLog, createLog } from '../utils/data/logData';
 import { useAuth } from '../utils/context/authContext';
+import getScoreByProfile from '../utils/data/scoreData';
 
 const initialState = {
   title: '',
@@ -17,7 +17,8 @@ const initialState = {
 };
 
 function LogForm({ obj, profileId }) {
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState(0);
+  const [score, setScore] = useState([]);
   const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
   const router = useRouter();
@@ -60,20 +61,20 @@ function LogForm({ obj, profileId }) {
   }, [obj]);
 
   useEffect(() => {
-    if (obj.profile) {
-      setProfile(obj.profile);
-    } else {
-      getSingleProfile(profileId).then(setProfile);
-    }
-  }, [profileId, obj.profile]);
-
-  useEffect(() => {
+    const selectedProfile = obj.profile ? obj.profile : profileId;
+    setProfile(Number(selectedProfile));
     setFormInput((prevState) => ({
       ...prevState,
-      profile: profile.id,
+      profile: selectedProfile,
       creator: user.id,
     }));
-  }, [profile, user, obj]);
+  }, [obj.profile, profileId, user]);
+
+  useEffect(() => {
+    getScoreByProfile(profile).then((scoreData) => {
+      setScore(scoreData[0]);
+    });
+  }, [profile]);
 
   return (
     <div>
@@ -95,6 +96,9 @@ function LogForm({ obj, profileId }) {
 
         <Form.Group className="mb-3" controlId="score_impact">
           <Form.Label>Impact on Ethos Score</Form.Label>
+          <div>Current Score: </div>
+          { /* eslint-disable-next-line react/no-unescaped-entities */ }
+          {score?.score || <div>This profile does not have a score. Your input here will create this profile's score.</div>}
           <Form.Control type="text" value={formInput.score_impact} placeholder="Enter a positive or negative number" name="score_impact" onChange={handleChange} />
         </Form.Group>
 
