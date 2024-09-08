@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import PropTypes from 'prop-types';
-import { getSingleProfile } from '../utils/data/profileData';
 import { updateLog, createLog } from '../utils/data/logData';
 import { useAuth } from '../utils/context/authContext';
 import getScoreByProfile from '../utils/data/scoreData';
@@ -18,7 +17,7 @@ const initialState = {
 };
 
 function LogForm({ obj, profileId }) {
-  const [profile, setProfile] = useState([]);
+  const [profile, setProfile] = useState(0);
   const [score, setScore] = useState([]);
   const [formInput, setFormInput] = useState(initialState);
   const { user } = useAuth();
@@ -62,20 +61,14 @@ function LogForm({ obj, profileId }) {
   }, [obj]);
 
   useEffect(() => {
-    getSingleProfile(profileId).then(setProfile);
-  }, [profileId]);
-
-  useEffect(() => {
-    setProfile(obj.profile);
-  }, [obj.profile]);
-
-  useEffect(() => {
+    const selectedProfile = obj.profile ? obj.profile : profileId;
+    setProfile(Number(selectedProfile));
     setFormInput((prevState) => ({
       ...prevState,
-      profile,
+      profile: selectedProfile,
       creator: user.id,
     }));
-  }, [profile, user, obj]);
+  }, [obj.profile, profileId, user]);
 
   useEffect(() => {
     getScoreByProfile(profile).then((scoreData) => {
