@@ -10,7 +10,7 @@ import getScoreByProfile from '../utils/data/scoreData';
 const initialState = {
   title: '',
   description: '',
-  score_impact: 0,
+  score_impact: '',
   profile: '',
   creator: '',
   event_date: '',
@@ -36,6 +36,7 @@ function LogForm({ obj, profileId }) {
     const payload = {
       ...formInput,
     };
+    console.log('form input:', formInput);
     if (obj.id) {
       updateLog({ ...payload, id: obj.id }).then(() => {
         router.push(`/logs/${obj.id}`);
@@ -52,7 +53,7 @@ function LogForm({ obj, profileId }) {
       setFormInput({
         title: obj.title || '',
         description: obj.description || '',
-        score_impact: obj.score_impact || 0,
+        score_impact: obj.score_impact || '',
         profile: obj.profile || '',
         creator: obj.creator || '',
         event_date: obj.event_date || '',
