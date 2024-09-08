@@ -62,23 +62,23 @@ function LogForm({ obj, profileId }) {
   }, [obj]);
 
   useEffect(() => {
-    if (obj.profile) {
-      setProfile(obj.profile);
-    } else {
-      getSingleProfile(profileId).then(setProfile);
-    }
-  }, [profileId, obj.profile]);
+    getSingleProfile(profileId).then(setProfile);
+  }, [profileId]);
+
+  useEffect(() => {
+    setProfile(obj.profile);
+  }, [obj.profile]);
 
   useEffect(() => {
     setFormInput((prevState) => ({
       ...prevState,
-      profile: profile.id,
+      profile,
       creator: user.id,
     }));
   }, [profile, user, obj]);
 
   useEffect(() => {
-    getScoreByProfile(profile.id).then((scoreData) => {
+    getScoreByProfile(profile).then((scoreData) => {
       setScore(scoreData[0]);
     });
   }, [profile]);

@@ -30,8 +30,7 @@ function ViewLog() {
         console.log('profile:', data);
       });
       getScoreByProfile(logDetails.profile).then((scoreData) => {
-        setScore(scoreData[0].score);
-        console.log('scoreData[0].score:', scoreData[0].score);
+        setScore(scoreData[0]);
       });
     }
   }, [logDetails]);
@@ -39,7 +38,7 @@ function ViewLog() {
   return (
     <>
       <h1>{profile?.name}</h1>
-      <h2>Current Score: {score || "This profile doesn't have a score yet"}</h2>
+      <h2>Current Score: {score.score || "This profile doesn't have a score yet"}</h2>
       <Card>
         <div>{logDetails?.title}</div>
         <div>description: </div>
@@ -68,6 +67,7 @@ ViewLog.propTypes = {
     score_impact: PropTypes.number,
     log_date: PropTypes.number,
     event_date: PropTypes.number,
+    profile: PropTypes.number,
   }).isRequired,
   profileDetails: PropTypes.shape({
     name: PropTypes.string,
