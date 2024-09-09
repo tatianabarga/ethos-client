@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
+import { Button } from 'react-bootstrap';
 import { useAuth } from '../../utils/context/authContext';
 import { getCirclesByUser } from '../../utils/data/circleData';
 
@@ -9,7 +10,6 @@ export default function Circles() {
 
   useEffect(() => {
     getCirclesByUser(user.id).then(setCircles);
-    console.log(circles);
   }, [user]);
 
   return (
@@ -21,6 +21,9 @@ export default function Circles() {
           <h3>{circle.name}</h3>
         </Link>
       ))}
+      <Link href="/circles/new.js" passHref>
+        <Button>Create A Circle</Button>
+      </Link>
     </div>
   );
 }
