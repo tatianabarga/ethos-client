@@ -36,8 +36,21 @@ const getCirclesByUser = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getSingleCircle = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/circles/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getAllCircles,
   getCirclesByProfile,
   getCirclesByUser,
+  getSingleCircle,
 };
