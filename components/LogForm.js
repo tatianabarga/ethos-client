@@ -100,7 +100,7 @@ function LogForm({ obj, profileId }) {
           <div>Current Score: </div>
           { /* eslint-disable-next-line react/no-unescaped-entities */ }
           {score?.score || <div>This profile does not have a score. Your input here will create this profile's score.</div>}
-          <Form.Control type="text" value={formInput.score_impact} placeholder="Enter a positive or negative number" name="score_impact" onChange={handleChange} />
+          <Form.Control type="number" value={formInput.score_impact} placeholder="Enter a positive or negative number" name="score_impact" onChange={handleChange} />
         </Form.Group>
 
         <Button variant="primary" type="submit">
