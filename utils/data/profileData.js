@@ -55,9 +55,22 @@ const updateProfile = (payload) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const getProfilesByCircle = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/profiles?circle=${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
+
 export {
   getProfilesByUser,
   getSingleProfile,
   createProfile,
   updateProfile,
+  getProfilesByCircle,
 };
