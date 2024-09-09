@@ -7,10 +7,12 @@ import { getLogsByProfile } from '../../utils/data/logData';
 import LogCard from '../../components/LogCard';
 import { getSingleProfile } from '../../utils/data/profileData';
 import getScoreByProfile from '../../utils/data/scoreData';
+import { getCirclesByProfile } from '../../utils/data/circleData';
 
 export default function ViewProfile() {
   const [profileDetails, setProfileDetails] = useState(null);
   const [logs, setLogs] = useState([]);
+  const [circles, setCircles] = useState([]);
   const [score, setScore] = useState({});
   const router = useRouter();
   const { id } = router.query;
@@ -37,6 +39,8 @@ export default function ViewProfile() {
       getScoreByProfile(id).then((scoreData) => {
         setScore(scoreData[0]);
       });
+
+      getCirclesByProfile(id).then(setCircles);
     }
 
     // Cleanup function to set isMounted to false when component unmounts
@@ -51,6 +55,11 @@ export default function ViewProfile() {
       <h2>Current Score: {score?.score || "This profile doesn't have a score yet"}</h2>
       <h2>bio:</h2>
       <>{profileDetails?.bio}</>
+      {/* loop through circles */}
+      <h2>Circles this profile is shared with:</h2>
+      {circles.map((circle) => (
+        <div>{circle.name}</div>
+      ))}
       {/* loop through logs with log card compenent */}
       {logs.map((log) => (
         <LogCard key={log.id} logObj={log} />
