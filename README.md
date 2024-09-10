@@ -34,7 +34,9 @@
 
 ## Tech Stack
 - ReactJS
+- Bootstrap
 - Sass
+- My own Python Server (linked above)
 
 
 ## Getting Started
