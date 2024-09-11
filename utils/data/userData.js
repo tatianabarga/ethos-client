@@ -12,17 +12,17 @@ const getSingleUser = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
-// const getAllUsers = () => new Promise((resolve, reject) => {
-//   fetch(`${clientCredentials.databaseURL}/circles`, {
-//     method: 'GET',
-//     headers: {
-//       'Content-Type': 'application/json',
-//     },
-//   })
-//     .then((response) => response.json())
-//     .then(resolve)
-//     .catch(reject);
-// });
+const getAllUsers = () => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/users`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then(resolve)
+    .catch(reject);
+});
 
 const getUsersByCircle = (id) => new Promise((resolve, reject) => {
   fetch(`${clientCredentials.databaseURL}/users?circle=${id}`, {
@@ -39,4 +39,5 @@ const getUsersByCircle = (id) => new Promise((resolve, reject) => {
 export {
   getUsersByCircle,
   getSingleUser,
+  getAllUsers,
 };

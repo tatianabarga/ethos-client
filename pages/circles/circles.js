@@ -21,7 +21,7 @@ export default function Circles() {
           <h3>{circle.name}</h3>
         </Link>
       ))}
-      <Link href="/circles/new.js" passHref>
+      <Link href="/circles/new" passHref>
         <Button>Create A Circle</Button>
       </Link>
     </div>

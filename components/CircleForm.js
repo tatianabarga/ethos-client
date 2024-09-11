@@ -3,23 +3,21 @@ import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-import PropTypes, { arrayOf } from 'prop-types';
-import { getCirclesByUser } from '../utils/data/circleData';
-import { createProfile, updateProfile } from '../utils/data/profileData';
+import PropTypes from 'prop-types';
 import { useAuth } from '../utils/context/authContext';
+import { getAllUsers, getUsersByCircle } from '../utils/data/userData';
+import { createCircle, updateCircle } from '../utils/data/circleData';
 
 const initialState = {
   name: '',
-  bio: '',
-  initial_score: 0,
-  circles: [],
+  users: [],
   creator: '',
 };
 
 function CircleForm({ obj }) {
-  const [circles, setCircles] = useState([]);
+  const [users, setUsers] = useState([]);
   const [formInput, setFormInput] = useState(initialState);
-  const [selectedCircles, setSelectedCircles] = useState([]);
+  const [selectedUsers, setSelectedUsers] = useState([]);
   const router = useRouter();
   const { user } = useAuth();
 
@@ -31,15 +29,15 @@ function CircleForm({ obj }) {
     }));
   };
 
-  const handleToggleCircle = (circleId) => {
-    setSelectedCircles((prevSelectedCircles) => {
-      let newCircles = [];
-      if (prevSelectedCircles.includes(circleId)) {
-        newCircles = prevSelectedCircles.filter((id) => id !== circleId);
+  const handleToggleUser = (userId) => {
+    setSelectedUsers((prevSelectedUsers) => {
+      let newUsers = [];
+      if (prevSelectedUsers.includes(userId)) {
+        newUsers = prevSelectedUsers.filter((id) => id !== userId);
       } else {
-        newCircles = [...prevSelectedCircles, circleId];
+        newUsers = [...prevSelectedUsers, userId];
       }
-      return newCircles;
+      return newUsers;
     });
   };
 
@@ -47,29 +45,44 @@ function CircleForm({ obj }) {
     e.preventDefault();
     const payload = {
       ...formInput,
-      circles: selectedCircles,
+      users: selectedUsers,
     };
     if (obj.id) {
-      updateProfile({ ...payload, id: obj.id }).then(() => {
-        router.push(`/profiles/${obj.id}`);
+      updateCircle({ ...payload, id: obj.id }).then(() => {
+        router.push(`/circles/${obj.id}`);
       });
     } else {
-      createProfile(payload).then(() => {
-        router.push('/user');
+      createCircle(payload).then(() => {
+        router.push('/circles/circles');
       });
     }
   };
 
   useEffect(() => {
-    getCirclesByUser(user.id).then(setCircles);
-    if (obj.circles) {
-      setSelectedCircles(obj.circles);
+    getAllUsers().then(setUsers);
+    if (selectedUsers.includes(user.id)) {
+      // do nothing
+    } else {
+      selectedUsers.push(user.id);
+    }
+  }, [selectedUsers, user]);
+
+  useEffect(() => {
+    if (obj.id) {
+      getUsersByCircle(obj.id).then((data) => {
+        const newUsers = [];
+        data.map((thisUser) => (
+          newUsers.push(thisUser.id)
+        ));
+        setSelectedUsers(newUsers);
+        console.log(selectedUsers);
+      });
       setFormInput((prevState) => ({
         ...prevState,
         ...obj,
       }));
     }
-  }, [user, obj, obj.circles]);
+  }, [obj]);
 
   useEffect(() => {
     setFormInput((prevState) => ({
@@ -83,33 +96,26 @@ function CircleForm({ obj }) {
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" value={formInput.name} placeholder="Enter the person/ corporation/ contractor name." name="name" onChange={handleChange} />
+          <Form.Control type="text" value={formInput.name} placeholder="Name this circle." name="name" onChange={handleChange} />
         </Form.Group>
 
-        <Form.Group className="mb-3" controlId="bio">
-          <Form.Label>Bio</Form.Label>
-          <Form.Control type="text" value={formInput.bio} placeholder="Who is this person/ corporation/ contractor? How are they involved? How are they related to other relevant profiles? Is there anything else circle members will need to know?" name="bio" onChange={handleChange} />
-        </Form.Group>
-
-        {obj.id ? null : (
-          <Form.Group className="mb-3" controlId="initialScore">
-            <Form.Label>Initial Score</Form.Label>
-            <Form.Control type="text" placeholder="You can give them an initial score here. This is optional." name="initial_score" onChange={handleChange} />
-          </Form.Group>
-        )}
-
-        <Form.Label>What circles do you want this profile to be shared with?</Form.Label>
-        <ToggleButtonGroup type="checkbox" className="mb-2" value={selectedCircles}>
-          {circles.map((circle) => (
+        <Form.Label>What users do you want this circle to be shared with?</Form.Label>
+        <ToggleButtonGroup
+          type="checkbox"
+          className="mb-2"
+          value={selectedUsers}
+          // onChange={handleUserSelection}
+        >
+          {users.map((thisUser) => (
             <ToggleButton
-              key={circle.id}
-              id={`circle-${circle.id}`}
+              key={thisUser.id}
+              id={`user-${thisUser.id}`}
               variant="outline-primary"
-              value={circle.id}
-              checked={selectedCircles.includes(circle.id)}
-              onChange={() => handleToggleCircle(circle.id)}
+              value={thisUser.id}
+              checked={selectedUsers.includes(thisUser.id)}
+              onChange={() => handleToggleUser(thisUser.id)}
             >
-              {circle.name}
+              {thisUser.name}
             </ToggleButton>
           ))}
         </ToggleButtonGroup>
@@ -127,7 +133,6 @@ CircleForm.propTypes = {
     name: PropTypes.string,
     id: PropTypes.number,
     creator: PropTypes.number,
-    circles: arrayOf(PropTypes.number),
   }),
 };
 
