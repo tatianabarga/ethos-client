@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { getProfilesByCircle } from '../../utils/data/profileData';
 import ProfileCard from '../../components/ProfileCard';
-import { getSingleCircle } from '../../utils/data/circleData';
+import { deleteCircle, getSingleCircle } from '../../utils/data/circleData';
 import { getSingleUser, getUsersByCircle } from '../../utils/data/userData';
 import { useAuth } from '../../utils/context/authContext';
 
@@ -18,6 +18,12 @@ export default function ViewProfile() {
   const router = useRouter();
   const { user } = useAuth();
   const { id } = router.query;
+
+  const deleteThisCircle = () => {
+    if (window.confirm(`Delete ${circleDetails.name}?`)) {
+      deleteCircle(circleDetails.id).then(router.push('/circles/circles'));
+    }
+  };
 
   useEffect(() => {
     let isMounted = true; // Flag to track if the component is mounted
@@ -73,11 +79,21 @@ export default function ViewProfile() {
       ))}
       {/* provide edit circle access only if the current user is the circle's creator */}
       {isCreator ? (
-        <Link href={`/circles/update/${circleDetails?.id}`} passHref>
-          <Button variant="primary" className="m-2">
-            Edit Circle
+        <div>
+          <Link href={`/circles/update/${circleDetails?.id}`} passHref>
+            <Button variant="primary" className="m-2">
+              Edit Circle
+            </Button>
+          </Link>
+          <Button
+            variant="danger"
+            onClick={() => {
+              deleteThisCircle();
+            }}
+          >
+            Delete this Circle
           </Button>
-        </Link>
+        </div>
       ) : null}
     </>
   );
