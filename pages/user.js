@@ -21,6 +21,11 @@ function Home() {
   return (
     <>
       <h1>Hey {user.name}!</h1>
+      <Link href="/editUser" passHref>
+        <Button variant="primary" className="m-2">
+          Edit User Name
+        </Button>
+      </Link>
       <h2>Your Profiles:</h2>
       {/* loop through profiles w profile card compenent */}
       {profiles.map((profile) => (

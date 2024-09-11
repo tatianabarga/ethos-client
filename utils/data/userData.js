@@ -36,8 +36,26 @@ const getUsersByCircle = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const updateUser = (payload) => new Promise((resolve, reject) => {
+  if (!payload.id) {
+    reject(new Error('User ID is required for updating a user.'));
+    return;
+  }
+
+  fetch(`${clientCredentials.databaseURL}/users/${payload.id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(payload),
+  })
+    .then((data) => resolve(data))
+    .catch(reject);
+});
+
 export {
   getUsersByCircle,
   getSingleUser,
   getAllUsers,
+  updateUser,
 };
