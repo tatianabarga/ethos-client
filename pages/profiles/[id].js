@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import Link from 'next/link';
 import { getLogsByProfile } from '../../utils/data/logData';
 import LogCard from '../../components/LogCard';
-import { getSingleProfile } from '../../utils/data/profileData';
+import { deleteProfile, getSingleProfile } from '../../utils/data/profileData';
 import getScoreByProfile from '../../utils/data/scoreData';
 import { getCirclesByProfile } from '../../utils/data/circleData';
 
@@ -16,6 +16,12 @@ export default function ViewProfile() {
   const [score, setScore] = useState({});
   const router = useRouter();
   const { id } = router.query;
+
+  const deleteThisPofile = () => {
+    if (window.confirm(`Delete ${profileDetails.name}?`)) {
+      deleteProfile(profileDetails.id).then(router.push('/'));
+    }
+  };
 
   useEffect(() => {
     let isMounted = true; // Flag to track if the component is mounted
@@ -72,6 +78,16 @@ export default function ViewProfile() {
       <Link href={`/logs/new?profileId=${profileDetails?.id}`} passHref>
         <Button variant="primary" className="m-2">
           Add a Log
+        </Button>
+      </Link>
+      <Link href={`/logs/new?profileId=${profileDetails?.id}`} passHref>
+        <Button
+          variant="danger"
+          onClick={() => {
+            deleteThisPofile();
+          }}
+        >
+          Delete this Profile
         </Button>
       </Link>
     </>
