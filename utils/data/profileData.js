@@ -67,10 +67,27 @@ const getProfilesByCircle = (id) => new Promise((resolve, reject) => {
     .catch(reject);
 });
 
+const deleteProfile = (id) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/profiles/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error('Error deleting profile');
+      }
+      resolve(response);
+    })
+    .catch(reject);
+});
+
 export {
   getProfilesByUser,
   getSingleProfile,
   createProfile,
   updateProfile,
   getProfilesByCircle,
+  deleteProfile,
 };

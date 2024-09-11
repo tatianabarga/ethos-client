@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-// import PropTypes from 'prop-types';
 import { useAuth } from '../utils/context/authContext';
 import { updateUser } from '../utils/data/userData';
 
@@ -57,21 +56,3 @@ export default function UserForm() {
     </div>
   );
 }
-
-// UserForm.propTypes = {
-//   obj: PropTypes.shape({
-//     title: PropTypes.string,
-//     description: PropTypes.string,
-//     id: PropTypes.number,
-//     score_impact: PropTypes.string,
-//     event_date: PropTypes.string,
-//     profile: PropTypes.number,
-//     creator: PropTypes.number,
-//   }),
-//   profileId: PropTypes.number,
-// };
-
-// UserForm.defaultProps = {
-//   obj: initialState,
-//   profileId: 0,
-// };
