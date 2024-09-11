@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
-import PropTypes, { arrayOf } from 'prop-types';
+import PropTypes from 'prop-types';
 import { useAuth } from '../utils/context/authContext';
 import { getAllUsers, getUsersByCircle } from '../utils/data/userData';
 import { createCircle, updateCircle } from '../utils/data/circleData';
@@ -69,7 +69,14 @@ function CircleForm({ obj }) {
 
   useEffect(() => {
     if (obj.id) {
-      getUsersByCircle(obj.id).then(setSelectedUsers);
+      getUsersByCircle(obj.id).then((data) => {
+        const newUsers = [];
+        data.map((thisUser) => (
+          newUsers.push(thisUser.id)
+        ));
+        setSelectedUsers(newUsers);
+        console.log(selectedUsers);
+      });
       setFormInput((prevState) => ({
         ...prevState,
         ...obj,
@@ -93,7 +100,12 @@ function CircleForm({ obj }) {
         </Form.Group>
 
         <Form.Label>What users do you want this circle to be shared with?</Form.Label>
-        <ToggleButtonGroup type="checkbox" className="mb-2" value={selectedUsers}>
+        <ToggleButtonGroup
+          type="checkbox"
+          className="mb-2"
+          value={selectedUsers}
+          // onChange={handleUserSelection}
+        >
           {users.map((thisUser) => (
             <ToggleButton
               key={thisUser.id}
@@ -121,7 +133,6 @@ CircleForm.propTypes = {
     name: PropTypes.string,
     id: PropTypes.number,
     creator: PropTypes.number,
-    users: arrayOf(PropTypes.number),
   }),
 };
 
