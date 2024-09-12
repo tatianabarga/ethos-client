@@ -10,12 +10,14 @@ function Home() {
   const [profiles, setProfiles] = useState([]);
 
   const getProfiles = () => {
-    getProfilesByUser(user.id).then(setProfiles);
+    getProfilesByUser(user?.id).then(setProfiles);
   };
 
   useEffect(() => {
-    getProfiles();
-    console.log(user);
+    if (user.id) {
+      getProfiles();
+      console.log(user);
+    }
   }, [user]);
 
   return (
