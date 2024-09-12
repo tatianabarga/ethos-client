@@ -1,11 +1,10 @@
 import { clientCredentials } from '../client';
 
-const getProfilesByUser = (id, creatorId) => new Promise((resolve, reject) => {
-  fetch(`${clientCredentials.databaseURL}/profiles?"creator_id"="${creatorId}"`, {
+const getProfilesByUser = (creatorId) => new Promise((resolve, reject) => {
+  fetch(`${clientCredentials.databaseURL}/profiles?creator=${creatorId}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
-      // Authorization: `${id}`, TODO: do i need this?? if not remove id prop
     },
   })
     .then((response) => response.json())

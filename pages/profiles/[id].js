@@ -80,16 +80,14 @@ export default function ViewProfile() {
           Add a Log
         </Button>
       </Link>
-      <Link href={`/logs/new?profileId=${profileDetails?.id}`} passHref>
-        <Button
-          variant="danger"
-          onClick={() => {
-            deleteThisPofile();
-          }}
-        >
-          Delete this Profile
-        </Button>
-      </Link>
+      <Button
+        variant="danger"
+        onClick={() => {
+          deleteThisPofile();
+        }}
+      >
+        Delete this Profile
+      </Button>
     </>
   );
 }
