@@ -62,3 +62,6 @@
 1. Open [http://localhost:3000](http://localhost:3000) with your browser.
 
 
+make sure you have the sass extension with an extension id of: syler.sass-indented
+make sure you have the live sass compiler extension with an extension id of: glenn2223.live-sass
+
