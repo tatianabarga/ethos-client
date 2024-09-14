@@ -19,7 +19,7 @@ export default function NewLog() {
 
   return (
     <div>
-      <h2>New Log for {profile?.name}</h2>
+      <div className="view-header">New Log for {profile?.name}</div>
       <LogForm profileId={profileId} />
     </div>
   );

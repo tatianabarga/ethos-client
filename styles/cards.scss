@@ -1,0 +1,49 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import "./variables";
+
+.card {
+  background-color: $dark;
+  color: $white;
+  padding: 20px;
+  margin: 10px;
+}
+
+#log-card {
+  width: 30%;
+  height: 30%
+}
+
+.circle-card:hover {
+  background-color: $yellow;
+}
+
+.user-card {
+  width: 20%;
+  height: 10%;
+  // font-size: 150%;
+  @include subheader2($white);
+  // button {
+  //   @include body-text($white);
+  // }
+}
+
+.subheader-card {
+  @include subheader1($white);
+}
+
+.header-card {
+  @include header1($white);
+}
+
+#inner-card {
+  border: none;
+}
+
+.body-card {
+  @include body-text($white);
+}
+
+// .component { 
+//   display: flex;
+
+// }

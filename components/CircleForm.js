@@ -93,21 +93,21 @@ function CircleForm({ obj }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form className="subheader-card" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
-          <Form.Control type="text" value={formInput.name} placeholder="Name this circle." name="name" onChange={handleChange} />
+          <Form.Control className="input body-text" type="text" value={formInput.name} placeholder="Name this circle." name="name" onChange={handleChange} />
         </Form.Group>
 
         <Form.Label>What users do you want this circle to be shared with?</Form.Label>
         <ToggleButtonGroup
           type="checkbox"
-          className="mb-2"
           value={selectedUsers}
-          // onChange={handleUserSelection}
+          className="toggles"
         >
           {users.map((thisUser) => (
             <ToggleButton
+              className="toggles"
               key={thisUser.id}
               id={`user-${thisUser.id}`}
               variant="outline-primary"

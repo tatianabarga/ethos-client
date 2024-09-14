@@ -14,13 +14,15 @@ export default function Circles() {
 
   return (
     <div>
-      <h2>Your Circles:</h2>
+      <h2 className="view-header">Your Circles:</h2>
       {/* loop through circles */}
-      {circles?.map((circle) => (
-        <Link href={`/circles/${circle.id}`} passHref>
-          <h3>{circle.name}</h3>
-        </Link>
-      ))}
+      <div>
+        {circles?.map((circle) => (
+          <Link href={`/circles/${circle.id}`} passHref>
+            <h3 className="subheader-card circle-card user-card card" id={`circle-${circle.id}`}>{circle.name}</h3>
+          </Link>
+        ))}
+      </div>
       <Link href="/circles/new" passHref>
         <Button>Create A Circle</Button>
       </Link>

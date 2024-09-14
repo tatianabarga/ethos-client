@@ -1,0 +1,16 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import "./variables";
+
+.logo {
+ color: $white;
+ font-family: $header-font;
+ font-size: xx-large;
+}
+
+.logo-o {
+  color: $highlight;
+}
+
+.nb-item:hover {
+  color: $yellow; 
+}

@@ -56,20 +56,22 @@ export default function ViewProfile() {
   }, [id]);
 
   return (
-    <>
-      <h1>{profileDetails?.name}</h1>
-      <h2>Current Score: {score?.score || "This profile doesn't have a score yet"}</h2>
-      <h2>bio:</h2>
-      <>{profileDetails?.bio}</>
+    <div className="component">
+      <h1 className="view-header">{profileDetails?.name}</h1>
+      <h2 className="view-subheader">Current Score: <span className="score">{score?.score || "This profile doesn't have a score yet"}</span></h2>
+      <h2 className="view-subheader">bio:</h2>
+      <div className="view-body">{profileDetails?.bio}</div>
       {/* loop through circles */}
-      <h2>Circles this profile is shared with:</h2>
+      <h2 className="view-subheader">Circles this profile is shared with:</h2>
       {circles.map((circle) => (
-        <div>{circle.name}</div>
+        <div className="view-body">{circle.name}</div>
       ))}
       {/* loop through logs with log card compenent */}
-      {logs.map((log) => (
-        <LogCard key={log.id} logObj={log} />
-      ))}
+      <div className="lists">
+        {logs.map((log) => (
+          <LogCard key={log.id} logObj={log} />
+        ))}
+      </div>
       <Link href={`/profiles/update/${profileDetails?.id}`} passHref>
         <Button variant="primary" className="m-2">
           Update Profile
@@ -88,7 +90,7 @@ export default function ViewProfile() {
       >
         Delete this Profile
       </Button>
-    </>
+    </div>
   );
 }
 

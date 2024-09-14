@@ -22,17 +22,21 @@ function Home() {
 
   return (
     <>
-      <h1>Hey {user.name}!</h1>
+      <h1 className="view-header">Hey {user.name}!</h1>
       <Link href="/editUser" passHref>
         <Button variant="primary" className="m-2">
           Edit User Name
         </Button>
       </Link>
-      <h2>Your Profiles:</h2>
+      <h2 className="view-subheader">Your Profiles:</h2>
       {/* loop through profiles w profile card compenent */}
-      {profiles.map((profile) => (
-        <ProfileCard key={profile.id} profileObj={profile} onUpdate={getProfiles} />
-      ))}
+      <div className="lists">
+        {profiles.map((profile) => (
+          <div className="subheader-card">
+            <ProfileCard key={profile.id} profileObj={profile} onUpdate={getProfiles} />
+          </div>
+        ))}
+      </div>
       <Link href="/profiles/new" passHref>
         <Button variant="primary" className="m-2">
           Create New Profile
