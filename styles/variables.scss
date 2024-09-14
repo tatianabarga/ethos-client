@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&family=Fira+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Playwrite+AT:ital,wght@0,100..400;1,100..400&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap');
+
+// colors
+$darkest: #011e1d;
+$dark: #32554d;
+$midtone: #033e31;
+// $midtone: #208e69;
+$yellow: #fcd979;
+$highlight: #fc7979;
+$white: #f1f2f6;
+// $light-taupe: #d4c4b8;
+// $softTeal: #7ad1c0;
+
+// text
+$logo-font: 'Playwrite AT';
+$header-font: 'Fira Code';
+$body-font: 'Roboto Mono';
+
+@mixin header1 ($txtcolor) {
+  font-size: 200%;
+  color: $txtcolor;
+  font-family: $header-font;
+  font-weight: 200;
+} 
+
+@mixin header2 ($txtcolor) {
+  font-size: 250%;
+  color: $txtcolor;
+  font-family: $header-font;
+  font-weight: 200;
+} 
+
+@mixin subheader2 ($txtcolor) {
+  font-size: 150%;
+  color: $txtcolor;
+  font-family: $header-font;
+  font-weight: 200;
+} 
+
+@mixin subheader1 ($txtcolor) {
+  font-size: 125%;
+  color: $txtcolor;
+  font-family: $header-font;
+  font-weight: 200;
+} 
+
+@mixin small-text ($txtcolor) {
+  font-size: 75%;
+  color: $txtcolor;
+  font-family: $body-font;
+  font-weight: 200;
+} 
+
+@mixin body-text ($txtcolor) {
+  font-size: 100%;
+  color: $txtcolor;
+  font-family: $body-font;
+  font-weight: 200;
+} 
+

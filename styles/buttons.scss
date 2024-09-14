@@ -1,0 +1,16 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import "./variables";
+
+.btn {
+  background-color: $midtone;
+  border: none;
+  margin: 2%;
+  @include body-text($white);
+}
+
+.btn:hover {
+  background-color: $highlight;
+  color: $white;
+  border: none;
+  @include body-text($white);
+}

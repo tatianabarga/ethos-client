@@ -14,7 +14,7 @@ export default function UpdateCircle() {
 
   return (
     <div>
-      Update {circleDetails.name}
+      <div className="view-header">Update {circleDetails.name}</div>
       <CircleForm obj={circleDetails} />
     </div>
   );

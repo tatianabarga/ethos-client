@@ -14,8 +14,10 @@ export default function UpdateProfile() {
 
   return (
     <div>
-      Update {profileDetails.name}
-      <ProfileForm obj={profileDetails} />
+      <div className="view-header">Update {profileDetails.name}</div>
+      <div className="subheader-card">
+        <ProfileForm obj={profileDetails} />
+      </div>
     </div>
   );
 }

@@ -1,0 +1,36 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import "./variables";
+
+.lists {
+  display: flex;
+  flex-direction: row;
+  // justify-content: center;
+  flex-wrap: wrap;
+}
+
+.score {
+  color: $highlight;
+}
+
+.small-text {
+  @include small-text($white);
+}
+
+.view-header {
+  @include header2($white);
+  margin: 2%;
+}
+
+.view-subheader {
+  @include subheader2($white);  
+}
+
+.view-body {
+  @include body-text($white);
+}
+
+.single-view {
+  div {
+    margin: 1%;
+  }
+}

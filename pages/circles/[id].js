@@ -64,19 +64,7 @@ export default function ViewProfile() {
 
   return (
     <>
-      <h1>{circleDetails?.name}</h1>
-      <h2>Creator:</h2>
-      <h3>{creator.name}</h3>
-      {/* loop through users */}
-      <h2>Users in this circle:</h2>
-      {users.map((thisUser) => (
-        <h3>{thisUser.name}</h3>
-      ))}
-      {/* loop through profiles */}
-      <h2>Profiles in this circle:</h2>
-      {profiles.map((profile) => (
-        <ProfileCard profileObj={profile} key={profile.id} />
-      ))}
+      <h1 className="view-header">{circleDetails?.name}</h1>
       {/* provide edit circle access only if the current user is the circle's creator */}
       {isCreator ? (
         <div>
@@ -86,7 +74,6 @@ export default function ViewProfile() {
             </Button>
           </Link>
           <Button
-            variant="danger"
             onClick={() => {
               deleteThisCircle();
             }}
@@ -95,6 +82,28 @@ export default function ViewProfile() {
           </Button>
         </div>
       ) : null}
+      <h2 className="view-subheader">Creator:</h2>
+      <div>
+        <div className="user-card card">{creator.name}</div>
+      </div>
+      {/* loop through users */}
+      <h2 className="view-subheader">Users in this circle:</h2>
+      <div className="lists">
+        {users.map((thisUser) => (
+          <div className="user-card card">
+            <div>{thisUser.name}</div>
+          </div>
+        ))}
+      </div>
+      {/* loop through profiles */}
+      <h2 className="view-subheader">Profiles in this circle:</h2>
+      <div className="lists">
+        {profiles.map((profile) => (
+          <div className="user-card">
+            <ProfileCard profileObj={profile} key={profile.id} />
+          </div>
+        ))}
+      </div>
     </>
   );
 }

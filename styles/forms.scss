@@ -1,0 +1,16 @@
+@import 'bootstrap/dist/css/bootstrap.css';
+@import "./variables";
+
+.input {
+  @include body-text($white);
+  background-color: $dark;
+}
+
+// .toggles:hover {
+//   background-color: $highlight !important;
+// }
+
+// .toggles[id^="user-"]:hover {
+//   background-color: $highlight; /* Or the color you want */
+//   // color: #fff; /* Optional: Change text color */
+// }

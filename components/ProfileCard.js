@@ -7,7 +7,7 @@ export default function ProfileCard({ profileObj }) {
   return (
     <div>
       <Card className="text-center">
-        <Card.Text>{profileObj.name}</Card.Text>
+        <Card.Text className="subheader-card">{profileObj.name}</Card.Text>
         <Card.Text>{profileObj.score}</Card.Text>
         <Card.Body>
 

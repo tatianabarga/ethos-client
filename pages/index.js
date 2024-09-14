@@ -14,8 +14,8 @@ function Home() {
         margin: '0 auto',
       }}
     >
-      <h1>Hello {user.fbUser.displayName}! </h1>
-      <p>Click the button below to logout!</p>
+      <h1 className="view-header">Hello {user.fbUser.displayName}! </h1>
+      <p className="subheader-card">Click the button below to logout</p>
       <Button variant="danger" type="button" size="lg" className="copy-btn" onClick={signOut}>
         Sign Out
       </Button>

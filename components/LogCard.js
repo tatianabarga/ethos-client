@@ -5,11 +5,11 @@ import PropTypes from 'prop-types';
 
 export default function LogCard({ logObj }) {
   return (
-    <div>
-      <Card className="text-center">
-        <Card.Text>{logObj.title}</Card.Text>
-        <Card.Text>{logObj.score_impact}</Card.Text>
-        <Card.Text>{logObj.event_date}</Card.Text>
+    <div className="card" id="log-card">
+      <Card className="text-center" id="inner-card">
+        <Card.Text className="subheader-card">{logObj.title}</Card.Text>
+        <Card.Text className="score">{logObj.score_impact}</Card.Text>
+        <Card.Text className="small-text">{logObj.event_date}</Card.Text>
         <Card.Text>{logObj.log_date}</Card.Text>
         <Card.Body>
 
