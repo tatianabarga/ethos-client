@@ -34,3 +34,20 @@
     margin: 1%;
   }
 }
+
+.clear-style {
+  text-decoration: none;
+}
+
+.view {
+  // display: flex;
+  flex-direction: column;
+  justify-content: center;
+  div {
+    margin: 1%;
+  }
+}
+
+.margin {
+  margin: 10%;
+}

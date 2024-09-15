@@ -105,6 +105,7 @@ function ProfileForm({ obj }) {
               key={circle.id}
               id={`circle-${circle.id}`}
               variant="outline-primary"
+              className="toggles"
               value={circle.id}
               checked={selectedCircles.includes(circle.id)}
               onChange={() => handleToggleCircle(circle.id)}

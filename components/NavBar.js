@@ -12,7 +12,7 @@ import { signOut } from '../utils/auth';
 export default function NavBar() {
   return (
     <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-      <Container>
+      <Container className="nb-cont">
         <Link passHref href="/">
           <Navbar.Brand className="logo">Eth<span className="logo-o">o</span>s</Navbar.Brand>
         </Link>
@@ -25,6 +25,9 @@ export default function NavBar() {
             </Link>
             <Link passHref href="/user">
               <Nav.Link className="view-subheader nb-item">My User</Nav.Link>
+            </Link>
+            <Link passHref href="/aboutme">
+              <Nav.Link className="view-subheader nb-item">Who Made This?</Nav.Link>
             </Link>
             <Button variant="danger" onClick={signOut}>
               Sign Out

@@ -2,8 +2,22 @@
 @import "./variables";
 
 .input {
+    @include body-text($white);
+    background-color: $dark;
+}
+
+.toggles:hover {
+  background-color: $highlight;
+  color: $white;
+  border: none;
   @include body-text($white);
-  background-color: $dark;
+}
+
+.mb-2:hover {
+  background-color: $highlight;
+  color: $white;
+  border: none;
+  @include body-text($white);
 }
 
 // .toggles:hover {
