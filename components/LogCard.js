@@ -4,13 +4,14 @@ import { Button, Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function LogCard({ logObj }) {
+  console.log('logObj:', logObj);
   return (
     <div className="card" id="log-card">
       <Card className="text-center" id="inner-card">
         <Card.Text className="subheader-card">{logObj.title}</Card.Text>
         <Card.Text className="score">{logObj.score_impact}</Card.Text>
-        <Card.Text className="small-text">{logObj.event_date}</Card.Text>
-        <Card.Text>{logObj.log_date}</Card.Text>
+        <Card.Text className="small-text">Event: {logObj.event_date}</Card.Text>
+        <Card.Text className="small-text">Logged: {logObj.log_date}</Card.Text>
         <Card.Body>
 
           {/* TODO: create new form functionality */}

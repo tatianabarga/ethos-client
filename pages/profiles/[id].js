@@ -64,7 +64,7 @@ export default function ViewProfile() {
       {/* loop through circles */}
       <h2 className="view-subheader">Circles this profile is shared with:</h2>
       {circles.map((circle) => (
-        <div className="view-body">{circle.name}</div>
+        <div key={circle.id} className="view-body">{circle.name}</div>
       ))}
       {/* loop through logs with log card compenent */}
       <div className="lists">
