@@ -8,7 +8,7 @@
 ## Features
 
 - **Profile Management**: Create and manage profiles for entities such as contractors, corporations, and individuals.
-<img width="1043" alt="profile form" src="utils/images/profileform.png">
+<img width="1043" alt="profile form" src="/utils/images/profileform.png">
 <img width="1043" alt="profile" src="utils/images/singleprofile.png">
   
 - **Ethos Score**: Each profile includes an Ethos Score updated based on user feedback.
