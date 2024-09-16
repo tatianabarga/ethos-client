@@ -14,7 +14,7 @@ export default function UpdateLog() {
 
   return (
     <div>
-      <h2>Update {logDetails?.title} Log</h2>
+      <h2 className="view-header">Update {logDetails?.title} Log</h2>
       <LogForm obj={logDetails} />
     </div>
   );

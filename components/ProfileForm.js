@@ -80,7 +80,7 @@ function ProfileForm({ obj }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form className="subheader-card" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
           <Form.Control type="text" value={formInput.name} placeholder="Enter the person/ corporation/ contractor name." name="name" onChange={handleChange} />
@@ -88,7 +88,7 @@ function ProfileForm({ obj }) {
 
         <Form.Group className="mb-3" controlId="bio">
           <Form.Label>Bio</Form.Label>
-          <Form.Control type="text" value={formInput.bio} placeholder="Who is this person/ corporation/ contractor? How are they involved? How are they related to other relevant profiles? Is there anything else circle members will need to know?" name="bio" onChange={handleChange} />
+          <Form.Control as="textarea" className="txtbox" value={formInput.bio} placeholder="Who is this person/ corporation/ contractor? How are they involved? How are they related to other relevant profiles? Is there anything else circle members will need to know?" name="bio" onChange={handleChange} />
         </Form.Group>
 
         {obj.id ? null : (

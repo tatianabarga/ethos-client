@@ -6,7 +6,7 @@ export default function Aboutme() {
     <div className="view">
       {/* eslint-disable-next-line react/jsx-curly-brace-presence */}
       <div className="view-header">{"Hey! It's me, Tati :)"}</div>
-      <Image width="400%" height="400%" alt="picture of me :)" src="/../public/IMG_20240516_185411_872.jpg" />
+      <Image width="400%" height="400%" alt="picture of me :)" src="/../utils/images/IMG_20240516_185411_872.jpg" />
       {/* eslint-disable-next-line react/jsx-curly-brace-presence */}
       <div className="view-subheader">{"I hope you're enjoying Ethos"}</div>
       <a className="view-body clear-style user-card card circle-card" href="https://github.com/tatianabarga/ethos-client" target="_blank" rel="noopener noreferrer">
