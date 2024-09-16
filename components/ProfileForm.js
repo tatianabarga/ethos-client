@@ -11,7 +11,7 @@ import { useAuth } from '../utils/context/authContext';
 const initialState = {
   name: '',
   bio: '',
-  initial_score: 0,
+  initial_score: '',
   circles: [],
   creator: '',
 };
