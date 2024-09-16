@@ -25,7 +25,7 @@
 - [Tatiana Barga](https://github.com/tatianabarga)
 
 ## Links and Resources
-- Deployed Project coming soon!
+- [deployed project](https://ethos-client.netlify.app)
 - [Wireframe](https://www.figma.com/design/OV8zg11xjindtsnKR8iW9k/Ethos?node-id=0-1&t=LpJ6Ndp5CZLbxgIk-0)
 - [Server-Side repository](https://github.com/tatianabarga/ethos-server)
 - [Project Board](https://github.com/users/tatianabarga/projects/5/views/1?pane=issue&itemId=70796528)
