@@ -11,7 +11,7 @@ import { signOut } from '../utils/auth';
 
 export default function NavBar() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+    <Navbar className="nav-bar" collapseOnSelect expand="lg" variant="dark">
       <Container className="nb-cont">
         <Link passHref href="/">
           <Navbar.Brand className="logo">Eth<span className="logo-o">o</span>s</Navbar.Brand>

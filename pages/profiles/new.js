@@ -4,7 +4,7 @@ import ProfileForm from '../../components/ProfileForm';
 export default function newProfile() {
   return (
     <div>
-      Create New Profile
+      <div className="header-card">Create New Profile</div>
       <ProfileForm />
     </div>
   );

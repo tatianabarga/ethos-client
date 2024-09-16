@@ -79,7 +79,7 @@ function LogForm({ obj, profileId }) {
 
   return (
     <div>
-      <Form onSubmit={handleSubmit}>
+      <Form className="subheader-card" onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="title">
           <Form.Label>Title</Form.Label>
           <Form.Control type="text" value={formInput.title} placeholder="Enter log title" name="title" onChange={handleChange} />
