@@ -4,7 +4,6 @@ import { Button, Card } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
 export default function LogCard({ logObj }) {
-  console.log('logObj:', logObj);
   return (
     <div className="card" id="log-card">
       <Card className="text-center" id="inner-card">
