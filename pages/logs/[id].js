@@ -68,7 +68,7 @@ function ViewLog() {
         <div className="subheader-card">event date: <span className="body-card">{logDetails?.event_date}</span></div>
         <div className="subheader-card">log date: <span className="body-card">{logDetails?.log_date}</span></div>
         <div className="subheader-card">created by: <span className="body-card">{creator?.name}</span></div>
-        {/* provide edit circle access only if the current user is the circle's creator */}
+        {/* provide edit log access only if the current user is the log's creator */}
         {isCreator ? (
           <div>
             <Link href={`/logs/update/${logDetails?.id}`} passHref>
