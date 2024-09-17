@@ -6,12 +6,17 @@ import Link from 'next/link';
 import { getSingleLog } from '../../utils/data/logData';
 import { getSingleProfile } from '../../utils/data/profileData';
 import getScoreByProfile from '../../utils/data/scoreData';
+import { getSingleUser } from '../../utils/data/userData';
+import { useAuth } from '../../utils/context/authContext';
 
 function ViewLog() {
   const [logDetails, setLogDetails] = useState(null);
   const [score, setScore] = useState({});
   const [profile, setProfile] = useState(null);
+  const [isCreator, setIsCreator] = useState(false);
+  const [creator, setCreator] = useState([]);
   const router = useRouter();
+  const { user } = useAuth();
   const { id } = router.query;
 
   useEffect(() => {
@@ -40,10 +45,20 @@ function ViewLog() {
     }
   }, [logDetails]);
 
+  useEffect(() => {
+    if (logDetails) {
+      if (user.id === logDetails.creator) {
+        setIsCreator(true);
+      }
+
+      getSingleUser(logDetails.creator).then(setCreator);
+    }
+  }, [user, logDetails]);
+
   return (
     <>
       <h1 className="view-header">{profile?.name}</h1>
-      <h2 className="view-subheader">Current Score: <span className="score">{score?.score !== null ? score.score : "This profile doesn't have a score yet"}</span></h2>
+      <h2 className="view-subheader">Current Ethos Score: <span className="score">{score?.score !== null ? score.score : "This profile doesn't have a score yet"}</span></h2>
       {/* <Card> */}
       <div className="single-view">
         <div className="header-card">{logDetails?.title}</div>
@@ -52,11 +67,17 @@ function ViewLog() {
         <div className="subheader-card">score impact: <span className="score">{logDetails?.score_impact}</span></div>
         <div className="subheader-card">event date: <span className="body-card">{logDetails?.event_date}</span></div>
         <div className="subheader-card">log date: <span className="body-card">{logDetails?.log_date}</span></div>
-        <Link href={`/logs/update/${logDetails?.id}`} passHref>
-          <Button variant="primary" className="m-2" obj={logDetails}>
-            Update Log
-          </Button>
-        </Link>
+        <div className="subheader-card">created by: <span className="body-card">{creator?.name}</span></div>
+        {/* provide edit circle access only if the current user is the circle's creator */}
+        {isCreator ? (
+          <div>
+            <Link href={`/logs/update/${logDetails?.id}`} passHref>
+              <Button variant="primary" className="m-2" obj={logDetails}>
+                Update Log
+              </Button>
+            </Link>
+          </div>
+        ) : null}
       </div>
       {/* </Card> */}
     </>

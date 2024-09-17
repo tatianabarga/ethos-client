@@ -58,7 +58,7 @@ export default function ViewProfile() {
   return (
     <div className="component">
       <h1 className="view-header">{profileDetails?.name}</h1>
-      <h2 className="view-subheader">Current Score: <span className="score">{score?.score || "This profile doesn't have a score yet"}</span></h2>
+      <h2 className="view-subheader">Ethos Score: <span className="score">{score?.score || "This profile doesn't have a score yet"}</span></h2>
       <h2 className="view-subheader">bio:</h2>
       <div className="view-body">{profileDetails?.bio}</div>
       {/* loop through circles */}
