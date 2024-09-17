@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useAuth } from '../utils/context/authContext';
-import { updateUser } from '../utils/data/userData';
+import { getAllUsers, updateUser } from '../utils/data/userData';
 
 const initialState = {
   name: '',
@@ -12,6 +12,7 @@ const initialState = {
 
 export default function UserForm() {
   const [formInput, setFormInput] = useState(initialState);
+  const [existingUsers, setExistingUsers] = useState([]);
   const { user } = useAuth();
   const router = useRouter();
 
@@ -25,14 +26,25 @@ export default function UserForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // check if user with name input already exists
+    const nameExists = existingUsers.some((existingUser) => existingUser.name.toLowerCase() === formInput.name.toLowerCase());
+
+    if (nameExists) {
+      alert('A user with this name already exists!');
+      return; // Prevent form submission
+    }
+
     const payload = {
       ...formInput,
     };
-    console.log('form input:', formInput);
     updateUser({ ...payload }).then(() => {
       router.push('/user');
     });
   };
+
+  useEffect(() => {
+    getAllUsers().then((data) => { setExistingUsers(data); });
+  });
 
   useEffect(() => {
     setFormInput({
@@ -42,7 +54,7 @@ export default function UserForm() {
   }, [user]);
 
   return (
-    <div>
+    <div className="subheader-card">
       <Form onSubmit={handleSubmit}>
         <Form.Group className="mb-3" controlId="name">
           <Form.Label>Name</Form.Label>
