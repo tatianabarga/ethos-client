@@ -8,13 +8,18 @@ import LogCard from '../../components/LogCard';
 import { deleteProfile, getSingleProfile } from '../../utils/data/profileData';
 import getScoreByProfile from '../../utils/data/scoreData';
 import { getCirclesByProfile } from '../../utils/data/circleData';
+import { useAuth } from '../../utils/context/authContext';
+import { getSingleUser } from '../../utils/data/userData';
 
 export default function ViewProfile() {
   const [profileDetails, setProfileDetails] = useState(null);
+  const [creator, setCreator] = useState([]);
+  const [isCreator, setIsCreator] = useState(false);
   const [logs, setLogs] = useState([]);
   const [circles, setCircles] = useState([]);
   const [score, setScore] = useState({});
   const router = useRouter();
+  const { user } = useAuth();
   const { id } = router.query;
 
   const deleteThisPofile = () => {
@@ -55,41 +60,58 @@ export default function ViewProfile() {
     };
   }, [id]);
 
+  useEffect(() => {
+    if (profileDetails) {
+      if (user.id === profileDetails.creator) {
+        setIsCreator(true);
+      }
+
+      getSingleUser(profileDetails.creator).then(setCreator);
+    }
+  }, [user, profileDetails]);
+
   return (
     <div className="component">
       <h1 className="view-header">{profileDetails?.name}</h1>
-      <h2 className="view-subheader">Ethos Score: <span className="score">{score?.score || "This profile doesn't have a score yet"}</span></h2>
-      <h2 className="view-subheader">bio:</h2>
+      {/* provide edit circle access only if the current user is the circle's creator */}
+      {isCreator ? (
+        <div>
+          <Link href={`/profiles/update/${profileDetails?.id}`} passHref>
+            <Button variant="primary" className="m-2">
+              Update Profile
+            </Button>
+          </Link>
+          <Button
+            variant="danger"
+            onClick={() => {
+              deleteThisPofile();
+            }}
+          >
+            Delete this Profile
+          </Button>
+        </div>
+      ) : null}
+      <h2 className="view-subheader sm-margin">Created by: <span>{creator?.name}</span></h2>
+      <h2 className="view-subheader sm-margin">Ethos Score: <span className="score">{score?.score || "This profile doesn't have a score yet"}</span></h2>
+      <h2 className="view-subheader sm-margin">bio:</h2>
       <div className="view-body">{profileDetails?.bio}</div>
       {/* loop through circles */}
-      <h2 className="view-subheader">Circles this profile is shared with:</h2>
+      <h2 className="view-subheader sm-margin">Circles this profile is shared with:</h2>
       {circles.map((circle) => (
         <div key={circle.id} className="view-body">{circle.name}</div>
       ))}
       {/* loop through logs with log card compenent */}
-      <div className="lists">
-        {logs.map((log) => (
-          <LogCard key={log.id} logObj={log} />
-        ))}
-      </div>
-      <Link href={`/profiles/update/${profileDetails?.id}`} passHref>
-        <Button variant="primary" className="m-2">
-          Update Profile
-        </Button>
-      </Link>
+      <div className="subheader-card sm-margin">Logs:</div>
       <Link href={`/logs/new?profileId=${profileDetails?.id}`} passHref>
         <Button variant="primary" className="m-2">
           Add a Log
         </Button>
       </Link>
-      <Button
-        variant="danger"
-        onClick={() => {
-          deleteThisPofile();
-        }}
-      >
-        Delete this Profile
-      </Button>
+      <div className="lists">
+        {logs.map((log) => (
+          <LogCard key={log.id} logObj={log} />
+        ))}
+      </div>
     </div>
   );
 }
