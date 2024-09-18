@@ -34,6 +34,7 @@
 
 ## Links and Resources
 - [deployed project](https://ethos-client.netlify.app)
+- [Video Walkthrough](https://www.loom.com/share/b4c42977a3704dd89b46817786824a8d?sid=b9f045e6-a44f-4cc4-a825-bda84029dc84)
 - [Wireframe](https://www.figma.com/design/OV8zg11xjindtsnKR8iW9k/Ethos?node-id=0-1&t=LpJ6Ndp5CZLbxgIk-0)
 - [Server-Side repository](https://github.com/tatianabarga/ethos-server)
 - [Project Board](https://github.com/users/tatianabarga/projects/5/views/1?pane=issue&itemId=70796528)
