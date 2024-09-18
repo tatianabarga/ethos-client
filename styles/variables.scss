@@ -12,9 +12,12 @@ $white: #f1f2f6;
 // $softTeal: #7ad1c0;
 
 // text
-$logo-font: 'Playwrite AT';
-$header-font: 'Fira Code';
-$body-font: 'Roboto Mono';
+// $logo-font: 'Playwrite AT';
+$logo-font: 'Courier New';
+// $header-font: 'Fira Code';
+$header-font: 'Courier New';
+// $body-font: 'Roboto Mono';
+$body-font: 'Courier New';
 
 @mixin header1 ($txtcolor) {
   font-size: 200%;
