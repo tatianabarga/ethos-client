@@ -59,6 +59,7 @@
 1. Copy over all of your Firebase values into the `.env` file.
 1. Go to the [Ethos server-side repository](https://github.com/tatianabarga/ethos-server) , clone it, and set it up in your env file. (instruction in README)
 1. From your command line, be in the root directory and run `npm install` OR `npm i` for short.
+2. Install Sass with the command npm i sass
 1. Make sure you have the sass extension with an extension id of: syler.sass-indented
 1. Make sure you have the live sass compiler extension with an extension id of: glenn2223.live-sass
 1. Next, run `npm run prepare`. This command sets up husky to track eslint errors on commit that will make your deploy fail on Netlify.
