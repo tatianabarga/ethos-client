@@ -13,3 +13,12 @@ body {
   background-color: $darkest;
   color: $white;
 }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
