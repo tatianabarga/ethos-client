@@ -26,6 +26,11 @@ export default function Aboutme() {
       <div className="view-subheader">More About Me</div>
       <div>
         <span>
+          <a href="https://tatiana-barga.netlify.app" target="_blank" rel="noopener noreferrer">
+            <Button className="btns-gen">Check out my Portfolio</Button>
+          </a>
+        </span>
+        <span>
           <a href="http://www.linkedin.com/in/tatiana-barga" target="_blank" rel="noopener noreferrer">
             <Button className="btn-link clear-style">Check out my LinkedIn</Button>
           </a>
@@ -34,31 +39,22 @@ export default function Aboutme() {
           <a href="https://github.com/tatianabarga" target="_blank" rel="noopener noreferrer">
             <Button className="btn-link clear-style">
               Check out my GitHub
-              {/* <span className="margin">
-                <Image width="20%" height="20%" src="/../public/githublogo.png" />
-              </span> */}
             </Button>
           </a>
         </span>
       </div>
-      {/* <a className="clear-style view-body" href="https://github.com/tatianabarga" target="_blank" rel="noopener noreferrer">
-        <button type="button" className="btn-github">
-          <svg
-            width="16"
-            height="16"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          />
-          Check out my GitHub
-        </button>
-      </a> */}
       <div className="view-subheader">See my other projects:</div>
       <div>
         <span>
           <a href="https://attention-defficient.netlify.app/" target="_blank" rel="noopener noreferrer">
             {/* eslint-disable-next-line react/jsx-curly-brace-presence */}
             <Button className="btn-link clear-style">{"Attention d'Efficient"}</Button>
+          </a>
+        </span>
+        <span>
+          <a href="https://tatiana-barga.netlify.app" target="_blank" rel="noopener noreferrer">
+            {/* eslint-disable-next-line react/jsx-curly-brace-presence */}
+            <Button className="btns-gen">My Portfolio</Button>
           </a>
         </span>
       </div>
