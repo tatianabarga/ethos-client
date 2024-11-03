@@ -13,6 +13,25 @@
   @include body-text($white);
 }
 
+.custom-checkbox {
+  cursor: pointer;  
+
+  .checky {
+    cursor: pointer;
+  }
+
+  .checky + .checkmark {
+    background-color: $dark;
+  }
+
+  input[type="checkbox"]
+
+  .checky:checked + .checkmark {
+    background-color: $highlight;
+    border-color: $highlight;
+  }
+}
+
 .mb-2:hover {
   background-color: $highlight;
   color: $white;

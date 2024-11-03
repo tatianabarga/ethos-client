@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import PropTypes, { arrayOf } from 'prop-types';
 import { getCirclesByUser } from '../utils/data/circleData';
 import { createProfile, updateProfile } from '../utils/data/profileData';
@@ -99,21 +98,21 @@ function ProfileForm({ obj }) {
         )}
 
         <Form.Label>What circles do you want this profile to be shared with?</Form.Label>
-        <ToggleButtonGroup type="checkbox" className="mb-2" value={selectedCircles}>
-          {circles.map((circle) => (
-            <ToggleButton
-              key={circle.id}
-              id={`circle-${circle.id}`}
-              variant="outline-primary"
-              className="toggles"
-              value={circle.id}
-              checked={selectedCircles.includes(circle.id)}
-              onChange={() => handleToggleCircle(circle.id)}
-            >
-              {circle.name}
-            </ToggleButton>
-          ))}
-        </ToggleButtonGroup>
+        {circles.map((circle) => (
+          <div className="btn checky">
+            <label key={circle.id} className="custom-checkbox">
+              <input
+                type="checkbox"
+                className="btn"
+                label={circle.name}
+                value={circle.id}
+                checked={selectedCircles.includes(circle.id)}
+                onChange={() => handleToggleCircle(circle.id)}
+              />
+              {/* <span>{circle.name}</span> */}
+            </label>
+          </div>
+        ))}
 
         <Button variant="primary" type="submit">
           Submit
